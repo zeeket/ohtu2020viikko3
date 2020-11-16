@@ -3,7 +3,7 @@ package ohtu;
 import com.google.gson.Gson;
 import java.io.IOException;
 import org.apache.http.client.fluent.Request;
-import java.util.Date;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,11 +17,16 @@ public class Main {
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
         java.util.Date date=new java.util.Date();  
+        ArrayList<Player> finnishPlayers = new ArrayList<Player>();
         System.out.println("Players from FIN "+date);
         for (Player player : players) {
             if(player.getNationality().equals("FIN")) {
-                System.out.println(player);
+                finnishPlayers.add(player);
             }
+        }   
+        Collections.sort(finnishPlayers, Collections.reverseOrder());
+        for (Player player : finnishPlayers) {
+                System.out.println(player);
         }   
     }
   
